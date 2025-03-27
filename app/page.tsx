@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { PlusCircle, CheckCircle, Circle, Calendar, Clock } from "lucide-react";
+import { PlusCircle, CheckCircle, Circle, Calendar } from "lucide-react";
 
 const TasksAILanding = () => {
   const [tasks, setTasks] = useState([
@@ -112,7 +112,7 @@ const TasksAILanding = () => {
         {/* Progress Bar */}
         <div className="mb-6">
           <div className="flex justify-between mb-2 text-sm">
-            <h2 className="text-gray-400">Today's Progress</h2>
+            <h2 className="text-gray-400">Progress</h2>
             <span className="text-gray-400">
               {completedCount}/{totalCount}
             </span>
@@ -127,7 +127,7 @@ const TasksAILanding = () => {
 
         {/* Tasks List */}
         <div className="mb-6">
-          <h2 className="text-sm text-gray-400 mb-4">Today's Tasks</h2>
+          <h2 className="text-sm text-gray-400 mb-4">Tasks for Today</h2>
 
           <ul className="space-y-3">
             {tasks.map((task) => (
