@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { PlusCircle, CheckCircle, Circle, Calendar } from "lucide-react";
-
+import { ProgressBar } from "@/src/ProgressBar";
 const TasksAILanding = () => {
   const [tasks, setTasks] = useState([
     {
@@ -80,7 +80,6 @@ const TasksAILanding = () => {
   const completedCount = tasks.filter((task) => task.completed).length;
   const totalCount = tasks.length;
   const progress = Math.round((completedCount / totalCount) * 100);
-
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "high":
@@ -96,7 +95,6 @@ const TasksAILanding = () => {
 
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-gray-100">
-      {/* Minimal Header */}
       <header className="p-4 border-b border-gray-800">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-light">TasksAI</h1>
@@ -110,20 +108,11 @@ const TasksAILanding = () => {
       {/* Main Content */}
       <main className="flex-1 overflow-auto p-4">
         {/* Progress Bar */}
-        <div className="mb-6">
-          <div className="flex justify-between mb-2 text-sm">
-            <h2 className="text-gray-400">Progress</h2>
-            <span className="text-gray-400">
-              {completedCount}/{totalCount}
-            </span>
-          </div>
-          <div className="h-1 bg-gray-800 rounded-full">
-            <div
-              className="h-1 bg-purple-500 rounded-full"
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-        </div>
+        <ProgressBar
+          completedCount={completedCount}
+          totalCount={totalCount}
+          progress={progress}
+        />
 
         {/* Tasks List */}
         <div className="mb-6">
