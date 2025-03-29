@@ -5,6 +5,9 @@ import { CheckCircle, Circle, Calendar } from "lucide-react";
 import { ProgressBar } from "@/src/ProgressBar";
 import { Task } from "@/types";
 import { AddTask } from "@/src/AddTask";
+import { DeleteTaskButton } from "@/src/DeleteTaskButton";
+import { Button } from "@/components/ui/button";
+
 const TasksAILanding = () => {
   const [tasks, setTasks] = useState<Task[]>([
     {
@@ -109,7 +112,7 @@ const TasksAILanding = () => {
                 key={task.id}
                 className="flex items-center p-2 rounded-lg border border-gray-800 bg-gray-800/30"
               >
-                <button
+                <Button
                   onClick={() => toggleTaskCompletion(task.id)}
                   className="mr-3 flex-shrink-0"
                 >
@@ -118,7 +121,7 @@ const TasksAILanding = () => {
                   ) : (
                     <Circle className="h-5 w-5 text-gray-600" />
                   )}
-                </button>
+                </Button>
 
                 <div className="flex-1">
                   <p
@@ -139,6 +142,11 @@ const TasksAILanding = () => {
                     )}`}
                   ></div>
                   <span className="text-xs text-gray-500">{task.time}</span>
+                  <DeleteTaskButton
+                    task={task}
+                    tasks={tasks}
+                    setTasks={setTasks}
+                  />
                 </div>
               </li>
             ))}
