@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { PlusCircle, CheckCircle, Circle, Calendar } from "lucide-react";
+import { CheckCircle, Circle, Calendar } from "lucide-react";
 import { ProgressBar } from "@/src/ProgressBar";
+import { Task } from "@/types";
+import { AddTask } from "@/src/AddTask";
 const TasksAILanding = () => {
-  const [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState<Task[]>([
     {
       id: 1,
       title: "Complete quarterly report",
@@ -42,29 +44,12 @@ const TasksAILanding = () => {
     },
   ]);
 
-  const [newTaskTitle, setNewTaskTitle] = useState("");
-
   const toggleTaskCompletion = (id: number) => {
     setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
-  };
-
-  const addNewTask = () => {
-    if (newTaskTitle.trim() === "") return;
-
-    const newTask = {
-      id: tasks.length + 1,
-      title: newTaskTitle,
-      priority: "medium",
-      completed: false,
-      time: "12:00 PM",
-    };
-
-    setTasks([...tasks, newTask]);
-    setNewTaskTitle("");
   };
 
   // Get today's date in a nice format
@@ -161,24 +146,7 @@ const TasksAILanding = () => {
         </div>
 
         {/* Add New Task - Minimal */}
-        <div className="border border-gray-800 rounded-lg bg-gray-800/30 p-3">
-          <div className="flex items-center">
-            <input
-              type="text"
-              placeholder="Add a new task..."
-              className="flex-1 p-2 bg-transparent border-b border-gray-700 focus:border-purple-500 outline-none text-gray-200 placeholder-gray-600"
-              value={newTaskTitle}
-              onChange={(e) => setNewTaskTitle(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && addNewTask()}
-            />
-            <button
-              onClick={addNewTask}
-              className="ml-2 text-purple-400 hover:text-purple-300"
-            >
-              <PlusCircle className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
+        <AddTask tasks={tasks} setTasks={setTasks} />
       </main>
     </div>
   );
